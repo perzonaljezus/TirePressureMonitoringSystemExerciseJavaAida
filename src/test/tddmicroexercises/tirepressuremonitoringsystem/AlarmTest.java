@@ -11,6 +11,9 @@ import static org.mockito.Mockito.*;
  */
 public class AlarmTest {
 
+    public static final boolean EXPECTED_ALARM_IS_ON = true;
+    public static final boolean EXPECTED_ALARM_IS_OFF = false;
+
     private SafetyRange safetyRange;
 
     @Before
@@ -22,19 +25,19 @@ public class AlarmTest {
     public void testIsAlarmOnWhenPressureOk() throws Exception {
         Alarm alarm = new Alarm(sensorThatProbes(20), safetyRange);
         alarm.check();
-        assertEquals(false, alarm.isAlarmOn());
+        assertEquals(EXPECTED_ALARM_IS_OFF, alarm.isAlarmOn());
     }
     @Test
     public void testIsAlarmOnWhenPressureTooLow() throws Exception {
         Alarm alarm = new Alarm(sensorThatProbes(15), safetyRange);
         alarm.check();
-        assertEquals(true, alarm.isAlarmOn());
+        assertEquals(EXPECTED_ALARM_IS_ON, alarm.isAlarmOn());
     }
     @Test 
     public void testIsAlarmOnWhenPressureTooHigh() throws Exception {
         Alarm alarm = new Alarm(sensorThatProbes(25), safetyRange);
         alarm.check();
-        assertEquals(true, alarm.isAlarmOn());
+        assertEquals(EXPECTED_ALARM_IS_ON, alarm.isAlarmOn());
     }
 
     @Test
