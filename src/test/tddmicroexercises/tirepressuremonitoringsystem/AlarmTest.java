@@ -23,19 +23,19 @@ public class AlarmTest {
 
     @Test
     public void testIsAlarmOnWhenPressureOk() throws Exception {
-        Alarm alarm = new Alarm(sensorThatProbes(20), safetyRange);
+        Alarm alarm = new Alarm(sensorThatProbesPressure(20), safetyRange);
         alarm.check();
         assertEquals(EXPECTED_ALARM_IS_OFF, alarm.isAlarmOn());
     }
     @Test
     public void testIsAlarmOnWhenPressureTooLow() throws Exception {
-        Alarm alarm = new Alarm(sensorThatProbes(15), safetyRange);
+        Alarm alarm = new Alarm(sensorThatProbesPressure(15), safetyRange);
         alarm.check();
         assertEquals(EXPECTED_ALARM_IS_ON, alarm.isAlarmOn());
     }
     @Test 
     public void testIsAlarmOnWhenPressureTooHigh() throws Exception {
-        Alarm alarm = new Alarm(sensorThatProbes(25), safetyRange);
+        Alarm alarm = new Alarm(sensorThatProbesPressure(25), safetyRange);
         alarm.check();
         assertEquals(EXPECTED_ALARM_IS_ON, alarm.isAlarmOn());
     }
@@ -48,7 +48,7 @@ public class AlarmTest {
         verify(sensor).popNextPressurePsiValue();
     }
 
-    protected Sensor sensorThatProbes(double value) {
+    protected Sensor sensorThatProbesPressure(double value) {
         Sensor sensor = mock(Sensor.class);
         doReturn(value).when(sensor).popNextPressurePsiValue();
         return sensor;
